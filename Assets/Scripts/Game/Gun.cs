@@ -201,10 +201,28 @@ public class Gun : MonoBehaviour
          * Implement both single shot and shotgun (swap by pressing <SPACE> by default)
          */
         
-        SpawnBullet(
-            new Vector3{ x = 0.0f, y = 0.0f, z = 0.0f }, 
-            Quaternion.Euler(0.0f, 0.0f, 0.0f)
-        );
+        if (shotgun) {
+            Quaternion rotation1 = Quaternion.Euler(director.eulerAngles) * Quaternion.Euler(0f, 0f, 20.0f);
+            Quaternion rotation2 = Quaternion.Euler(director.eulerAngles) * Quaternion.Euler(0f, 0f, 10.0f);
+            Quaternion rotation3 = Quaternion.Euler(director.eulerAngles) * Quaternion.Euler(0f, 0f, 0.0f);
+            Quaternion rotation4 = Quaternion.Euler(director.eulerAngles) * Quaternion.Euler(0f, 0f, -10.0f);
+            Quaternion rotation5 = Quaternion.Euler(director.eulerAngles) * Quaternion.Euler(0f, 0f, -20.0f);
+
+            for (int i = 0; i < shotgunBullets; i++) {
+                SpawnBullet(director.position, rotation1);
+                SpawnBullet(director.position, rotation2);
+                SpawnBullet(director.position, rotation3);
+                SpawnBullet(director.position, rotation4);
+                SpawnBullet(director.position, rotation5);
+            }
+        } else {
+            Quaternion rotation = Quaternion.Euler(director.eulerAngles) * Quaternion.Euler(0f, 0f, 0.0f);
+
+            for (int i = 0; i < shotgunBullets; i++) {
+                SpawnBullet(director.position, rotation);
+            }
+        }
+        
     }
 
     /// <summary>
